@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "f08c19ce-a611-4044-998c-50e6325859a9",
+		"name": "好处不贵外卖",
+		"description": "项目是关于外卖业务的前后台分离Web App，功能模块包含商家, 商品, 购物车, 用户管理等多个模块； 3.后台应用技术架构为: Node + Express + Mongodb + Mongoose； 4.前台应用技术架构为: vue + vuex + vue-router + webpack + ES6； 5.采用模块化、组件化、工程化的模式开发；",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "根据经纬度获取位置信息",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/position/40.10038,116.36867",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"position",
+						"40.10038,116.36867"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取食品分类列表",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/index_category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"index_category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "根据经纬度获取商铺列表",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "latitude",
+							"value": "40.10038",
+							"type": "text"
+						},
+						{
+							"key": "longitude",
+							"value": "116.36867",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/shops?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shops"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": "40.10038",
+							"description": "纬度",
+							"disabled": true
+						},
+						{
+							"key": "longitude",
+							"value": "116.36867",
+							"description": "经度",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "根据经纬度和关键字搜索商铺列表",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/search_shops?geohash=40.10038,116.36867&keyword=test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"search_shops"
+					],
+					"query": [
+						{
+							"key": "geohash",
+							"value": "40.10038,116.36867",
+							"description": "经纬度"
+						},
+						{
+							"key": "keyword",
+							"value": "test",
+							"description": "关键字"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取一次性验证码",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/captcha",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"captcha"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户名密码登陆",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "aaa",
+							"type": "text"
+						},
+						{
+							"key": "pwd",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "fgpc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/login_pwd?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"login_pwd"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "aaa",
+							"description": "用户名",
+							"disabled": true
+						},
+						{
+							"key": "pwd",
+							"value": "123",
+							"description": "密码",
+							"disabled": true
+						},
+						{
+							"key": "captcha",
+							"value": "lwuu",
+							"description": "验证码",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "发送短信验证码",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "13716962779",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/sendcode?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"sendcode"
+					],
+					"query": [
+						{
+							"key": "phone",
+							"value": "13716962779",
+							"description": "手机号",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "手机号验证码登陆",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/login_sms?phone=string&code=string",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"login_sms"
+					],
+					"query": [
+						{
+							"key": "phone",
+							"value": "string",
+							"description": "手机号"
+						},
+						{
+							"key": "code",
+							"value": "string",
+							"description": "验证码"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "根据会话获取用户信息",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/userinfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"userinfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户登出",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

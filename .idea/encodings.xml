@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/shop-client/src/api/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-client/src/components/FooterGuide/FooterGuide.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-client/src/components/ShopList/ShopList.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-client/src/pages/Login/Login.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-client/src/pages/MSite/MSite.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-client/src/pages/Order/Order.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-client/src/pages/Profile/Profile.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-client/src/pages/Search/Search.vue" charset="UTF-8" />
+  </component>
+</project>
