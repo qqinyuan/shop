@@ -1,41 +1,41 @@
 /*
-ajaxÇëÇóº¯ÊıÄ£¿é
-·µ»ØÖµ£º promise¶ÔÏó(Òì²½·µ»ØµÄÊı¾İÊÇ£ºresponse.data)
+ajaxè¯·æ±‚å‡½æ•°æ¨¡å—
+è¿”å›å€¼ï¼š promiseå¯¹è±¡(å¼‚æ­¥è¿”å›çš„æ•°æ®æ˜¯ï¼šresponse.data)
 */
 import axios from 'axios'
-export default function ajax (url, data={}, type='GET') {
-    // Ö±½Ó·µ»Øresponse.data
-    return new Promise(function (reslove,reject) {
-        // Ö´ĞĞÒì²½ajaxÇëÇó,Òì²½·µ»ØµÄÊı¾İÊÇresponse.data£¬¶ø²»ÊÇresponse
-        let promise // Õâ¸öÄÚ²¿µÄpromiseÓÃÀ´±£´æaxiosµÄ·µ»ØÖµ(promise¶ÔÏó)
-        if (type === 'GET') {
-            // ×¼±¸url query²ÎÊıÊı¾İ
-            let dataStr = '' //Êı¾İÆ´½Ó×Ö·û´®£¬½«dataÁ¬½Óµ½url
-            Object.keys(data).forEach(key => {
-                dataStr += key + '=' + dat[key] + '&'
-            })
-            if (dataStr !== '') {
-                dataStr = dataStr.substring(0,dataStr.lastIndexOf('&'))
-                url = url + '?' + dataStr
-            }
-            // ·¢ËÍgetÇëÇó
-            promise = axios.get(url)
-        } else {
-            // ·¢ËÍpostÇëÇó
-            promise = axios.post(url,data)
-        }
-        // return promise
-        promise.then(function (response) {
-            // ³É¹¦ÁËµ÷ÓÃresolve()
-            resolve(response.data)
-        })
-        .catch(function (error) {
-                // Ê§°ÜÁËµ÷ÓÃreject()
-                reject(error)
-            })
+export default function ajax (url, data = {}, type = 'GET') {
+  // ç›´æ¥è¿”å›response.data
+  return new Promise(function (resolve, reject) {
+    // æ‰§è¡Œå¼‚æ­¥ajaxè¯·æ±‚,å¼‚æ­¥è¿”å›çš„æ•°æ®æ˜¯response.dataï¼Œè€Œä¸æ˜¯response
+    let promise // è¿™ä¸ªå†…éƒ¨çš„promiseç”¨æ¥ä¿å­˜axiosçš„è¿”å›å€¼(promiseå¯¹è±¡)
+    if (type === 'GET') {
+      // å‡†å¤‡url queryå‚æ•°æ•°æ®
+      let dataStr = '' // æ•°æ®æ‹¼æ¥å­—ç¬¦ä¸²ï¼Œå°†dataè¿æ¥åˆ°url
+      Object.keys(data).forEach(key => {
+        dataStr += key + '=' + data[key] + '&'
+      })
+      if (dataStr !== '') {
+        dataStr = dataStr.substring(0, dataStr.lastIndexOf('&'))
+        url = url + '?' + dataStr
+      }
+      // å‘é€getè¯·æ±‚
+      promise = axios.get(url)
+    } else {
+      // å‘é€postè¯·æ±‚
+      promise = axios.post(url, data)
+    }
+    // return promise
+    promise.then(function (response) {
+      // æˆåŠŸäº†è°ƒç”¨resolve()
+      resolve(response.data)
     })
+      .catch(function (error) {
+        // å¤±è´¥äº†è°ƒç”¨reject()
+        reject(error)
+      })
+  })
 }
-/*const response = await ajax()
+/* const response = await ajax()
 * const result = response.data
-* Ï£ÍûµÃµ½µÄÊÇ£º
-* const result = await ajax()*/
+* å¸Œæœ›å¾—åˆ°çš„æ˜¯ï¼š
+* const result = await ajax() */

@@ -1,0 +1,1 @@
+{"version":3,"sources":["mutations.js"],"names":[],"mappings":"AAAA;;;AAGA,eAAe,EAAf","file":"mutations-compiled.js","sourcesContent":["/*\r\n * 直接更新state的多个方法的对象\r\n */\r\nexport default {\r\n\r\n}"]}

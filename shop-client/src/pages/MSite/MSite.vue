@@ -2,47 +2,33 @@
   <section class="msite">
     <!--首页头部title-->
     <!--由msite_header改成header，为了用公共的头部样式-->
-    <HeaderTop title="电子科技大学沙河校区（建设路二段）">
-      <span class="header_search" slot="left"><!--slot="left"指定插槽-->
+    <HeaderTop :title="address.name">
+      <router-link class="header_search" slot="left" to="/search"><!--slot="left"指定插槽-->
         <i class="iconfont icon-sousuo"></i>
-      </span>
-      <span class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
+      </router-link>
+      <router-link class="header_login" slot="right" :to="userInfo._id ? '/userinfo': '/login'">
+        <span class="header_login_text" v-if="!userInfo._id">登录|注册</span>
+        <span class="header_login_text" v-else><i class="iconfont icon-yonghuming"></i></span>
+      </router-link>
     </HeaderTop>
     <!--首页导航轮播-->
     <nav class="msite_nav">
       <!--在页面msite_nav导航部分使用swiper-->
-      <div class="swiper-container">
+      <div class="swiper-container" v-if="categorys.length">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
+          <div class="swiper-slide" v-for="(categorys, index) in categorysArr" :key="index">
+            <a href="javascript:" class="link_to_food" v-for="(category, index) in categorys" :key="index">
               <div class="food_container">
-                <!--<img src="./images/nav/1.jpg">-->
+                <img :src=" baseImageUrl + category.image_url">
               </div>
-              <span>甜品饮品</span>
+              <span>{{category.title}}</span>
             </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <!--<img src="./images/nav/2.jpg">-->
-              </div>
-              <span>商超便利</span>
-            </a>
-           <!--下面的图片省略-->
-          </div>
-          <div class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <!--<img src="./images/nav/9.jpg">-->
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <!--同样省略-->
           </div>
         </div>
         <!-- 轮播图页码 -->
         <div class="swiper-pagination"></div>
       </div>
+      <img src="./images/msite_back.svg" alt="back" v-else>
     </nav>
     <!--首页附近商家列表-->
     <div class="msite_shop_list">
@@ -56,22 +42,76 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 // 引入注册
 import HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
 import ShopList from '../../components/ShopList/ShopList'
 export default {
+  data () {
+    return {
+      baseImageUrl: 'https://fuss10.elemecdn.com'
+    }
+  },
   mounted () {
-    // 注意要在页面加载完成之后（mounted）再进行swiper的初始化
-    // 创建一个Swiper实例对象，来实现轮播
-    new Swiper('.swiper-container', {
-      loop: true, // 可以循环轮播
-      // 如果需要分页器
-      pagination: {
-        el: '.swiper-pagination'
-      }
-    })
+    this.$store.dispatch('getCategorys')
+    this.$store.dispatch('getShops')
+  },
+  computed: {
+    ...mapState(['address', 'categorys', 'userInfo']),
+
+    // 根据categorys一维数组生成一个二维数组，小数组中的元素个数最大是8
+    categorysArr () {
+      const {categorys} = this
+      // 准备空的二维数组
+      const arr = []
+      // 准备一个小数组（最大长度为8）
+      let minArr = []
+      // 遍历categorys得到处理后的二维数组catagorysArr
+      categorys.forEach(c => {
+        // 如果当前小数组已经满了，创建一个新的
+        if (minArr.length === 8) {
+          minArr = []
+        }
+        // 如果minArr是空的，将小数组保存到大数组中
+        if (minArr.length === 0) {
+          arr.push(minArr)
+        }
+        // 将当前分类保存到小数组中
+        minArr.push(c)
+      })
+      return arr
+    }
+  },
+  // 监视解决轮播图的bug
+  watch: {
+    categorys (value) { // categorys数组中有数据了，在异步更新之前执行了，可以设置个时间让在之后执行
+      // 使用setTimeout可以实现效果，但不是太好
+      /* setTimeout(() => {
+        // 注意要在页面加载完成之后（mounted）再进行swiper的初始化
+        // 创建一个Swiper实例对象，来实现轮播
+        new Swiper('.swiper-container', {
+          loop: true, // 可以循环轮播
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        })
+      }, 100) */
+      // 页面更新就立即创建Swiper对象
+      this.$nextTick(() => { // 一旦完成页面更新，立即调用(此条语句要写在数据更新之后)
+        // 注意要在页面加载完成之后（mounted）再进行swiper的初始化
+        // 创建一个Swiper实例对象，来实现轮播
+        new Swiper('.swiper-container', {
+          loop: true, // 可以循环轮播
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        })
+      })
+    }
   },
   // 映射成标签
   components: {

@@ -1,0 +1,1 @@
+{"version":3,"sources":["actions.js"],"names":[],"mappings":"AAAA;;;AAGA,eAAe,EAAf","file":"actions-compiled.js","sourcesContent":["/*\r\n * 通过mutation间接更新state的多个方法的对象\r\n */\r\nexport default {\r\n\r\n}"]}

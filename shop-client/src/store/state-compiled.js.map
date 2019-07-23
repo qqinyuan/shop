@@ -1,0 +1,1 @@
+{"version":3,"sources":["state.js"],"names":[],"mappings":"AAAA;;;AAGA,eAAe,EAAf","file":"state-compiled.js","sourcesContent":["/**\r\n * 状态对象\r\n */\r\nexport default {\r\n\r\n}"]}

@@ -9,9 +9,30 @@
 </template>
 
 <script>
+// 另一种方法
+import {mapActions} from 'vuex'
+
 import FooterGuide from './components/FooterGuide/FooterGuide.vue'
 // 引入底部组件并注册
+
+// import {reqCategorys} from './api'
+
 export default {
+  // async mounted () {
+  mounted () {
+    // const result = await reqCategorys()
+    // console.log(result)
+
+    // 通过this.$store.dispatch 方法触发调用Action
+    // this.$store.dispatch('getAddress')
+
+    // 另一种方法
+    this.getAddress()
+    this.getUserInfo()
+  },
+  methods: {
+    ...mapActions(['getAddress', 'getUserInfo'])
+  },
   components: {
     FooterGuide
   }
